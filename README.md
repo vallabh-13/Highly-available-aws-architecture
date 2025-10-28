@@ -115,13 +115,13 @@ terraform -chdir=state-bucket destroy -auto-approve
 
 ## 🧩 Common Errors & Fixes
 
-### ❌ Target Group Not Connected
+## ❌ Target Group Not Connected
 **Cause**: EC2 instance not registered or health check failing  
 **Fix**: Ensure Apache is running and responds with HTTP 200 on `/`. Check security group and target group health.
 
 ---
 
-### ❌ Route 53 DNS Not Resolving
+## ❌ Route 53 DNS Not Resolving
 **Cause**: Domain nameservers don’t match hosted zone  
 **Fix**:  
 - Go to Route 53 → Registered Domains  
@@ -149,6 +149,7 @@ ns-1157.awsdns-16.org
 - Implement tagging standards for cost tracking  
 - Enable AWS Config for compliance monitoring  
 - Add CloudWatch dashboards for visibility  
+
 
 
 
