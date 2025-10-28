@@ -4,7 +4,7 @@
 
 ## 📌 Project Overview
 
-This Terraform-based project provisions a fault-tolerant, production-grade web hosting stack on AWS. It includes EC2 instances behind an Auto Scaling Group and Application Load Balancer (ALB), a Multi-AZ RDS database layer, DNS failover via Route 53, and shared storage using Amazon EFS. The architecture is designed for high availability, scalability, and resilience—aligned with AWS's Reliability Pillar.
+This Terraform-based project provisions a fault-tolerant, production-grade web hosting stack on AWS. It includes EC2 instances behind an Auto Scaling Group and Application Load Balancer (ALB), a Multi-AZ RDS database layer, Route 53 - Simple Routing, and shared storage using Amazon EFS. The architecture is designed for high availability, scalability, and resilience—aligned with AWS's Reliability Pillar.
 
 ---
 ## 🖼️ Diagram 
@@ -15,7 +15,7 @@ This Terraform-based project provisions a fault-tolerant, production-grade web h
 
 - 🚀 Launch Compute Layer (EC2 Auto Scaling + ALB)  
 - 🗄️ Deploy Database Layer (RDS Multi-AZ)  
-- 🌐 Configure DNS Failover with Route 53  
+- 🌐 Understand the possibility of using DNS Failover with Route 53
 - 📦 Integrate Shared Storage via Amazon EFS  
 - 🧠 Set Up Remote State Management (S3 + DynamoDB)  
 - ✅ Validate Infrastructure and Extend as Needed  
@@ -61,12 +61,12 @@ This Terraform-based project provisions a fault-tolerant, production-grade web h
 ## 🧱 Architecture Summary
 
 | Layer       | Components                                                                  |
-|------------|------------------------------------------------------------------------------|
+|------------ | ----------------------------------------------------------------------------|
 | Compute     | EC2 instances in Auto Scaling Group, behind ALB                             |
 | Database    | Amazon RDS (Multi-AZ, PostgreSQL/MySQL)                                     |
 | Storage     | Amazon EFS mounted to EC2 instances                                         |
 | Networking  | VPC with public/private subnets, NAT Gateway for outbound traffic           |
-| DNS         | Route 53 hosted zone with failover routing to ALB                           |
+| DNS         | Route 53 hosted zone with simple routing to ALB (preferred Failover Routing)|
 | Monitoring  | CloudWatch metrics, ALB health checks                                       |
 | State Mgmt  | S3 backend with optional DynamoDB locking                                   |
 
@@ -109,7 +109,7 @@ terraform -chdir=state-bucket destroy -auto-approve
 - EC2 module launches ASG with Apache and EFS mount  
 - ALB module distributes traffic and performs health checks  
 - RDS module provisions Multi-AZ database  
-- Route 53 module creates A record and failover routing  
+- Route 53 module creates A record and simple routing to ALB
 - Remote state stored in S3 with optional DynamoDB locking  
 
 ---
@@ -136,15 +136,15 @@ terraform -chdir=state-bucket destroy -auto-approve
 - Validate DNS with `dig`, `nslookup`, or [dnschecker.org](https://dnschecker.org)  
 - Use CloudWatch alarms for ALB and EC2 health monitoring  
 - If you delete the hosted zone to save cost, update your registered domain’s nameservers accordingly  
-
+- Simple routing is used in this project to demonstrate baseline DNS resolution and ALB integration. It’s ideal for initial deployments where traffic is directed to a single  endpoint without conditional logic.
+- Failover routing is preferred in production environments to ensure high availability. It enables automatic redirection to a secondary resource (e.g., S3 static site or standby ALB) if the primary becomes unhealthy, minimizing downtime and improving resilience.
 ---
 
 ## 🔧 What Could Be Improved
 
-- Add CI/CD pipeline for automated deployment  
-- Implement tagging standards for cost tracking  
-- Enable AWS Config for compliance monitoring  
-- Add CloudWatch dashboards for visibility  
+- Add CI/CD pipeline for automated deployment 
+- Upgrade from simple to failover routing for Route 53. This would allow DNS-level resilience by redirecting traffic to a backup endpoint during outages, aligning with high- availability goals.
+- Integrate health checks with failover records. This ensures that Route 53 only redirects traffic when the primary resource fails, avoiding false positives and improving reliability.
 
 
 
