@@ -1,5 +1,5 @@
 
-## 🔁 Highly Available aws Architecture (Reliability Pillar)
+## 🔁 Highly Available Aws Architecture (Reliability Pillar)
 
 
 ## 📌 Project Overview
@@ -145,6 +145,7 @@ terraform -chdir=state-bucket destroy -auto-approve
 - Add CI/CD pipeline for automated deployment 
 - Upgrade from simple to failover routing for Route 53. This would allow DNS-level resilience by redirecting traffic to a backup endpoint during outages, aligning with high- availability goals.
 - Integrate health checks with failover records. This ensures that Route 53 only redirects traffic when the primary resource fails, avoiding false positives and improving reliability.
+
 
 
 
