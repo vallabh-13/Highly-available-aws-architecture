@@ -127,12 +127,7 @@ terraform -chdir=state-bucket destroy -auto-approve
 **Fix**:  
 - Go to Route 53 → Registered Domains  
 - Update nameservers to match hosted zone:
-```text
-ns-1572.awsdns-04.co.uk  
-ns-218.awsdns-27.com  
-ns-752.awsdns-30.net  
-ns-1157.awsdns-16.org  
-```
+- 
 ---
 
 ## 🧠 Notes
@@ -150,6 +145,7 @@ ns-1157.awsdns-16.org
 - Implement tagging standards for cost tracking  
 - Enable AWS Config for compliance monitoring  
 - Add CloudWatch dashboards for visibility  
+
 
 
 
