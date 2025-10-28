@@ -1,5 +1,5 @@
 
-## AWS Highly Available Web Architecture (Reliability Pillar)
+## 🔁 AWS Highly Available Web Architecture (Reliability Pillar)
 
 ## 📌 Project Overview
 
@@ -149,6 +149,7 @@ ns-1157.awsdns-16.org
 - Implement tagging standards for cost tracking  
 - Enable AWS Config for compliance monitoring  
 - Add CloudWatch dashboards for visibility  
+
 
 
 
