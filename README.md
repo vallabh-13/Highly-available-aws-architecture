@@ -6,7 +6,7 @@
 This Terraform-based project provisions a fault-tolerant, production-grade web hosting stack on AWS. It includes EC2 instances behind an Auto Scaling Group and Application Load Balancer (ALB), a Multi-AZ RDS database layer, DNS failover via Route 53, and shared storage using Amazon EFS. The architecture is designed for high availability, scalability, and resilience—aligned with AWS's Reliability Pillar.
 
 ---
-## Diagram 
+## 🖼️ Diagram 
 
 ![Highly-available-aws-architecture](Diagram/Aws-Highly-Available-Web-Architecture.png)
 
@@ -149,5 +149,6 @@ ns-1157.awsdns-16.org
 - Implement tagging standards for cost tracking  
 - Enable AWS Config for compliance monitoring  
 - Add CloudWatch dashboards for visibility  
+
 
 
